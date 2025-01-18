@@ -42,8 +42,11 @@ python sinusoidal_gores.py \
   --output_image final_projection.png \
   --degree_step 30
 ```
+
+A photo from a Lizard
 ![A photo from a Lizard](lizard.jpg)
 
+A photo from a Lizard
 ![A photo from a Lizard after the Spherical Sinusoidal Projection](lizard_projected_image.png) 
 
 ## How It Works
