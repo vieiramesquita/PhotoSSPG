@@ -46,7 +46,7 @@ python sinusoidal_gores.py \
 A photo from a Lizard
 ![A photo from a Lizard](lizard.jpg)
 
-A photo from a Lizard
+After the Spherical Sinusoidal Projection
 ![A photo from a Lizard after the Spherical Sinusoidal Projection](lizard_projected_image.png) 
 
 ## How It Works
