@@ -27,9 +27,10 @@ def split_into_degree_gores(image, output_folder, degree_step=20):
 
 # Function to apply a spherical sinusoidal transformation to a single gore
 def spherical_sinusoidal_projection(image):
+    # Initialize result with white background
     width, height = image.size
     pixels = np.array(image)
-    result = np.zeros_like(pixels)
+    result = np.ones_like(pixels) * 255  # White background
 
     for y in range(height):
         lat = math.pi * (y / height - 0.5)  # Latitude [-π/2, π/2]
@@ -41,19 +42,18 @@ def spherical_sinusoidal_projection(image):
 
             if 0 <= x_mapped < width:
                 result[y_mapped, x_mapped] = pixels[y, x]
-
     # Fix gaps in a buffer around the center row
     center_row = height // 2
     buffer = 2  # Number of rows above and below the center row to fix
 
     for y in range(max(0, center_row - buffer), min(height, center_row + buffer + 1)):
         for x in range(width):  # Include edges for completeness
-            if np.all(result[y, x] == 0):  # If pixel is empty
+            if np.all(result[y, x] == 255):  # If pixel is white (empty)
                 # Search for valid neighbors in a larger horizontal range
                 neighbors = []
                 for offset in range(-5, 6):  # Check up to 5 pixels on either side
                     nx = x + offset
-                    if 0 <= nx < width and not np.all(result[y, nx] == 0):
+                    if 0 <= nx < width and not np.all(result[y, nx] == 255):
                         neighbors.append(result[y, nx])
 
                 # Average neighbors if found
@@ -61,13 +61,13 @@ def spherical_sinusoidal_projection(image):
                     result[y, x] = np.mean(neighbors, axis=0).astype(result.dtype)
                 else:
                     # Propagate the closest valid pixel
-                    if x > 0 and not np.all(result[y, x - 1] == 0):
+                    if x > 0 and not np.all(result[y, x - 1] == 255):
                         result[y, x] = result[y, x - 1]
-                    elif x < width - 1 and not np.all(result[y, x + 1] == 0):
+                    elif x < width - 1 and not np.all(result[y, x + 1] == 255):
                         result[y, x] = result[y, x + 1]
 
     return Image.fromarray(result)
-
+    
 # Function to merge all gores back into a single image
 def merge_gores(gore_files, output_file):
     gores = [Image.open(gore_file) for gore_file in gore_files]
