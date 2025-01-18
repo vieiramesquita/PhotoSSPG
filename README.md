@@ -31,7 +31,7 @@ python sinusoidal_gores.py --input <input_image> --output_dir <output_directory>
 - `--degree_step` (optional): Degree step for splitting the image into gores. Default is `20` degrees.
 
 ### Example
-To process an image `world_map.jpg`, split it into gores of 30 degrees, and save the output:
+To process an image `lizard.jpg`, split it into gores of 20 degrees (18 pieces), and save the output:
 
 ```bash
 python sinusoidal_gores.py \
@@ -40,6 +40,9 @@ python sinusoidal_gores.py \
   --output_image final_projection.png \
   --degree_step 30
 ```
+![A photo from a Lizard](lizard.jpg)
+
+![A photo from a Lizard after the Spherical Sinusoidal Projection](lizard_projected_image.png)
 
 ## How It Works
 
