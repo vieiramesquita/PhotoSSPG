@@ -1,3 +1,5 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X8I8RI6)
+
 # Photo Spherical Sinusoidal Projection with Gores
 
 This Python script processes an image by splitting it into gores, applying a spherical sinusoidal projection to each gore, and merging them back into a single output image.
